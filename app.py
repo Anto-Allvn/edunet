@@ -2,6 +2,10 @@ import streamlit as st
 import pandas as pd
 import joblib
 import numpy as np
+import os
+
+print("File exists:", os.path.exists("random_forest_model.pkl"))
+print("File size (MB):", os.path.getsize("random_forest_model.pkl") / 1024 / 1024)
 
 import requests
 import joblib
@@ -126,4 +130,5 @@ if st.button("Predict Energy Consumption"):
         st.success(f"The predicted energy consumption is: {predicted_consumption:.2f} kWh")
     else:
         st.warning("Cannot make prediction due to missing data file.")
+
 
