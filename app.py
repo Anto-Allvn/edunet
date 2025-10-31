@@ -3,18 +3,23 @@ import pandas as pd
 import joblib
 import numpy as np
 import os
+import joblib, requests, os
 
 print("File exists:", os.path.exists("random_forest_model.pkl"))
 print("File size (MB):", os.path.getsize("random_forest_model.pkl") / 1024 / 1024)
 
-import requests
-import joblib
 
-url = "https://drive.google.com/file/d/1hggH670mypDdqUxSiq6nYkC8I7iqjsqi/view?usp=sharing"
-r = requests.get(url)
-open("random_forest_model.pkl", "wb").write(r.content)
+MODEL_URL = "https://drive.google.com/uc?export=download&id=YOUR_FILE_ID"
+
+# download once if not present
+if not os.path.exists("random_forest_model.pkl"):
+    st.write("Downloading model...")
+    with open("random_forest_model.pkl", "wb") as f:
+        f.write(requests.get(MODEL_URL).content)
 
 model = joblib.load("random_forest_model.pkl")
+st.write("Model loaded successfully!")
+
 
 
 # Define the prediction function
@@ -130,5 +135,6 @@ if st.button("Predict Energy Consumption"):
         st.success(f"The predicted energy consumption is: {predicted_consumption:.2f} kWh")
     else:
         st.warning("Cannot make prediction due to missing data file.")
+
 
 
