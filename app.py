@@ -3,6 +3,16 @@ import pandas as pd
 import joblib
 import numpy as np
 
+import requests
+import joblib
+
+url = "https://drive.google.com/file/d/1hggH670mypDdqUxSiq6nYkC8I7iqjsqi/view?usp=sharing"
+r = requests.get(url)
+open("random_forest_model.pkl", "wb").write(r.content)
+
+model = joblib.load("random_forest_model.pkl")
+
+
 # Define the prediction function
 def predict_energy_consumption(model, hour, day_of_week, month, outdoor_temperature, household_size, appliance_type, season, all_features):
     """
@@ -116,3 +126,4 @@ if st.button("Predict Energy Consumption"):
         st.success(f"The predicted energy consumption is: {predicted_consumption:.2f} kWh")
     else:
         st.warning("Cannot make prediction due to missing data file.")
+
