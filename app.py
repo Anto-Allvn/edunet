@@ -9,7 +9,7 @@ print("File exists:", os.path.exists("random_forest_model.pkl"))
 print("File size (MB):", os.path.getsize("random_forest_model.pkl") / 1024 / 1024)
 
 
-MODEL_URL = "https://drive.google.com/uc?export=download&id=YOUR_FILE_ID"
+MODEL_URL = "https://drive.google.com/uc?export=download&id=1hggH670mypDdqUxSiq6nYkC8I7iqjsqi"
 
 # download once if not present
 if not os.path.exists("random_forest_model.pkl"):
@@ -135,6 +135,7 @@ if st.button("Predict Energy Consumption"):
         st.success(f"The predicted energy consumption is: {predicted_consumption:.2f} kWh")
     else:
         st.warning("Cannot make prediction due to missing data file.")
+
 
 
 
